@@ -1,6 +1,6 @@
 from distutils.core import setup
 
 
-setup(name='raii_logging',
+setup(name='wcpan.logger',
       version='1.0.0',
-      packages=['raii_logging'])
+      packages=['wcpan'])
