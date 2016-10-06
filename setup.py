@@ -8,7 +8,6 @@ setup(
         author_email='legnaleurc@gmail.com',
         url='https://github.com/legnaleurc/wcpan.logger',
         packages=[
-            'wcpan',
             'wcpan.logger',
         ],
         classifiers=[
