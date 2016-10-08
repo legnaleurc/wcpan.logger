@@ -52,10 +52,13 @@ def setup(file_path, log_name_list):
 
 
 def create_handler(path, formatter):
-    # alias
-    TRFHandler = logging.handlers.TimedRotatingFileHandler
-    # rotate on Sunday
-    handler = TRFHandler(path, when='w6', atTime=datetime.time())
+    if path:
+        # alias
+        TRFHandler = logging.handlers.TimedRotatingFileHandler
+        # rotate on Sunday
+        handler = TRFHandler(path, when='w6', atTime=datetime.time())
+    else:
+        handler = logging.StreamHandler()
     handler.setLevel(logging.DEBUG)
     handler.setFormatter(formatter)
     return handler
