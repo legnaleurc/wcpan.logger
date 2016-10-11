@@ -8,3 +8,6 @@ upload: clean all
 
 clean:
 	rm -rf ./dist
+
+test:
+	python -m compileall wcpan
