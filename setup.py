@@ -14,6 +14,9 @@ setup(
         author='Wei-Cheng Pan',
         author_email='legnaleurc@gmail.com',
         url='https://github.com/legnaleurc/wcpan.logger',
+        namespace_packages=[
+            'wcpan',
+        ],
         packages=[
             'wcpan.logger',
         ],
