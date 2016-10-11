@@ -8,7 +8,7 @@ with open(op.join(op.dirname(__file__), './README.rst')) as fin:
 
 setup(
         name='wcpan.logger',
-        version='1.0.0.dev6',
+        version='1.0.0.dev7',
         description='A RAII style logging module',
         long_description=long_description,
         author='Wei-Cheng Pan',
