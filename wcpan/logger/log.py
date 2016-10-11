@@ -11,11 +11,11 @@ class Logger(object):
         self._level = level
         self._parts = []
 
-    def __lshift__(self, part: Any) -> Logger:
+    def __lshift__(self, part: Any) -> 'Logger':
         self._parts.append(str(part))
         return self
 
-    def __del__(self):
+    def __del__(self) -> None:
         msg = ' '.join(self._parts)
         log = getattr(self._logger, self._level)
         log(msg)
