@@ -45,10 +45,11 @@ def EXCEPTION(name: str) -> Logger:
     return Logger(name, 'exception')
 
 
-def setup(log_name_list: Iterable[str], file_path: str = None) -> List[logging.Logger]:
+def setup(log_name_list: Iterable[str], file_path: str = None, ) -> List[logging.Logger]:
     formatter = logging.Formatter('{asctime}|{threadName:_<10.10}|{levelname:_<8}|{message}', style='{')
     handler = create_handler(file_path, formatter)
-    return list(bind_to_logger(handler, log_name_list))
+    loggers = [create_logger(name, handler) for name in log_name_list]
+    return loggers
 
 
 def create_handler(path: Optional[str], formatter: logging.Formatter) -> logging.Handler:
@@ -64,11 +65,10 @@ def create_handler(path: Optional[str], formatter: logging.Formatter) -> logging
     return handler
 
 
-def bind_to_logger(handler: logging.Handler, names: Iterable[str]) -> Generator[logging.Logger, None, None]:
-    for name in names:
-        logger = create_logger(name)
-        logger.addHandler(handler)
-        yield logger
+def create_logger(name: str, handler: logging.Handler) -> logging.Logger:
+    logger = create_logger(name)
+    logger.addHandler(handler)
+    return logger
 
 
 def create_logger(name: str) -> logging.Logger:
