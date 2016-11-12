@@ -66,13 +66,8 @@ def create_handler(path: Optional[str], formatter: logging.Formatter) -> logging
 
 
 def create_logger(name: str, handler: logging.Handler) -> logging.Logger:
-    logger = create_logger(name)
-    logger.addHandler(handler)
-    return logger
-
-
-def create_logger(name: str) -> logging.Logger:
     logger = logging.getLogger(name)
     logger.propagate = False
     logger.setLevel(logging.DEBUG)
+    logger.addHandler(handler)
     return logger
