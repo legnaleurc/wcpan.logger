@@ -47,14 +47,18 @@ def EXCEPTION(name: str, exception: Exception = None) -> Logger:
     return Logger(name, 'exception', exception)
 
 
-def setup(log_name_list: Iterable[str], file_path: str = None) -> List[logging.Logger]:
-    formatter = logging.Formatter('{asctime}|{threadName:_<10.10}|{levelname:_<8}|{message}', style='{')
+def setup(log_name_list: Iterable[str],
+          file_path: str = None) -> List[logging.Logger]:
+    formatter = logging.Formatter(
+        '{asctime}|{threadName:_<10.10}|{levelname:_<8}|{message}',
+        style='{')
     handler = create_handler(file_path, formatter)
     loggers = [create_logger(name, handler) for name in log_name_list]
     return loggers
 
 
-def create_handler(path: Optional[str], formatter: logging.Formatter) -> logging.Handler:
+def create_handler(path: Optional[str],
+                   formatter: logging.Formatter) -> logging.Handler:
     if path:
         # alias
         TRFHandler = logging.handlers.TimedRotatingFileHandler
