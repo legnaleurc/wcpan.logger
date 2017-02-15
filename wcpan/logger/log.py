@@ -5,11 +5,13 @@ from typing import Any, Generator, Iterable, List, Optional
 
 class Logger(object):
 
-    def __init__(self, name: str, level: str) -> None:
+    def __init__(self, name: str, level: str,
+                 exception: Optional[Exception]) -> None:
         super().__init__()
         self._logger = logging.getLogger(name)
         self._level = level
         self._parts = []
+        self._exception = exception
 
     def __lshift__(self, part: Any) -> 'Logger':
         self._parts.append(str(part))
@@ -18,31 +20,31 @@ class Logger(object):
     def __del__(self) -> None:
         msg = ' '.join(self._parts)
         log = getattr(self._logger, self._level)
-        log(msg)
+        log(msg, exc_info=self._exception)
 
 
 def DEBUG(name: str) -> Logger:
-    return Logger(name, 'debug')
+    return Logger(name, 'debug', None)
 
 
 def INFO(name: str) -> Logger:
-    return Logger(name, 'info')
+    return Logger(name, 'info', None)
 
 
 def WARNING(name: str) -> Logger:
-    return Logger(name, 'warning')
+    return Logger(name, 'warning', None)
 
 
 def ERROR(name: str) -> Logger:
-    return Logger(name, 'error')
+    return Logger(name, 'error', None)
 
 
 def CRITICAL(name: str) -> Logger:
-    return Logger(name, 'critical')
+    return Logger(name, 'critical', None)
 
 
-def EXCEPTION(name: str) -> Logger:
-    return Logger(name, 'exception')
+def EXCEPTION(name: str, exception: Exception = None) -> Logger:
+    return Logger(name, 'exception', exception)
 
 
 def setup(log_name_list: Iterable[str], file_path: str = None) -> List[logging.Logger]:
