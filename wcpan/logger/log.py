@@ -1,5 +1,6 @@
 import datetime
 import logging
+import logging.handlers as lh
 from typing import Any, Generator, Iterable, List, Optional
 
 
@@ -61,7 +62,7 @@ def create_handler(path: Optional[str],
                    formatter: logging.Formatter) -> logging.Handler:
     if path:
         # alias
-        TRFHandler = logging.handlers.TimedRotatingFileHandler
+        TRFHandler = lh.TimedRotatingFileHandler
         # rotate on Sunday
         handler = TRFHandler(path, when='w6', atTime=datetime.time())
     else:
